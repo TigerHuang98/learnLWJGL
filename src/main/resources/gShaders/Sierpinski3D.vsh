@@ -1,6 +1,6 @@
 #version 330
 
-layout(triangles) in ;
+layout(triangles_adjacency) in ;
 layout(triangle_strip, max_vertices = 3) out;
 
 in VS_OUT{
@@ -16,13 +16,13 @@ void main()
     gl_PointSize = gl_in[0].gl_PointSize;
     gs_out[0].color=gs_in[0].color;
     EmitVertex();
-    gl_Position = gl_in[1].gl_Position;
-    gl_PointSize = gl_in[1].gl_PointSize;
-    gs_out[0].color=gs_in[1].color;
-    EmitVertex();
     gl_Position = gl_in[2].gl_Position;
     gl_PointSize = gl_in[2].gl_PointSize;
     gs_out[0].color=gs_in[2].color;
+    EmitVertex();
+    gl_Position = gl_in[4].gl_Position;
+    gl_PointSize = gl_in[4].gl_PointSize;
+    gs_out[0].color=gs_in[4].color;
     EmitVertex();
     EndPrimitive();
 }

@@ -66,7 +66,7 @@ public class Mesh{
         glBindVertexArray(getVaoId());
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
-        glDrawElements(GL_TRIANGLES,getVertexCount(),GL_UNSIGNED_INT,0);
+        glDrawElements(GL_TRIANGLES_ADJACENCY,getVertexCount(),GL_UNSIGNED_INT,0);
 //        glDrawElements(GL_POINTS,getVertexCount(),GL_UNSIGNED_INT,0);
 //        glDrawArrays(GL_LINES,0,2);
 
