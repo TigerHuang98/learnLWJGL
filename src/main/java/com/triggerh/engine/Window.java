@@ -73,8 +73,8 @@ public class Window{
         GL.createCapabilities();
         glEnable(GL_FRAMEBUFFER_SRGB);
         glEnable(GL_DEPTH_TEST);
-//        glEnable(GL_CULL_FACE);
-//        glCullFace(GL_BACK);
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_BACK);
         glEnable(GL_PROGRAM_POINT_SIZE);
         setClearColor(0.0f,0.0f,0.0f,0.0f);
     }
