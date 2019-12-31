@@ -46,34 +46,53 @@ public class GameLogic extends AbstractGameLogic{
         );
         gameItem.setPosition(0,0,5f);
 //        gameItems=new GameItem[]{gameItem};
+
+
         GameItem Tetrahedron=new GameItem(
-                new Mesh(
-                        new float[]{//position
-                                -1,-1,-1,
-                                -1,1,1,
-                                1,-1,1,
-                                1,1,-1
-                        },
-                        new float[]{//color
-                                1.0f,0.0f,0.0f,
-                                1.0f,1.0f,0.0f,
-                                0.0f,1.0f,0.0f,
-                                0.0f,0.0f,1.0f
-                        },
-                        new int[]{//0,1,2,3
-//                                0,  2,  1,
-//                                1,  3,  0,
-//                                2,  3,  1,
-//                                3,  2,  0
-
-                                0,3,1,3,2,3,//switch 1&2 can get in side out
-//                                1,2,3,2,0,2,
-//                                2,0,3,0,1,0,
-//                                3,1,2,1,0,1,
-                        }
-
-                )
+                Sierpinski3D.getSierpinski3DMesh(
+                        new Vector3f(-1,-1,-1),
+                        new Vector3f(-1,1,1),
+                        new Vector3f(1,-1,1),
+                        new Vector3f(1,1,-1),
+                        new Vector3f(1.0f,0.0f,0.0f),
+                        new Vector3f(1.0f,1.0f,0.0f),
+                        new Vector3f(0.0f,1.0f,0.0f),
+                        new Vector3f(0.0f,0.0f,1.0f),
+                        7
+                        )
+//                new Mesh(
+//                        new float[]{//position
+//                                -1,-1,-1,
+//                                -1,1,1,
+//                                1,-1,1,
+//                                1,1,-1,
+//                                -5,-5,-5,
+//                                -5,5,5,
+//                                5,-5,5,
+//                                5,5,-5
+//                        },
+//                        new float[]{//color
+//                                1.0f,0.0f,0.0f,
+//                                1.0f,1.0f,0.0f,
+//                                0.0f,1.0f,0.0f,
+//                                0.0f,0.0f,1.0f
+//                        },
+//                        new int[]{//0,1,2,3
+////                                0,  2,  1,
+////                                1,  3,  0,
+////                                2,  3,  1,
+////                                3,  2,  0
+//
+//                                0,3,1,3,2,3,//switch 1&2 can get in side out
+//                                4,7,5,7,6,7
+////                                1,2,3,2,0,2,
+////                                2,0,3,0,1,0,
+////                                3,1,2,1,0,1,
+//                        }
+//
+//                )
         );
+        Tetrahedron.setScale(10);
         gameItems=new GameItem[]{Tetrahedron};
     }
 
