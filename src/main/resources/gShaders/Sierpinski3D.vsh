@@ -1,7 +1,7 @@
 #version 330
 
 layout(lines_adjacency) in ;
-layout(triangle_strip, max_vertices=256) out;//max_vertices=192 can create half level-3 Sierpinski3D
+layout(triangle_strip, max_vertices=192) out;
 
 in VS_OUT{
 vec3 color;
@@ -25,11 +25,35 @@ void tetrahedron(vec4 p0,vec4 p1,vec4 p2,vec4 p3,vec3 c0,vec3 c1,vec3 c2,vec3 c3
     gl_Position=p1;
     gs_out[0].color=c1;
     EmitVertex();
+    EndPrimitive();
+
+    gl_Position=p0;
+    gs_out[0].color=c0;
+    EmitVertex();
+    gl_Position=p1;
+    gs_out[0].color=c1;
+    EmitVertex();
     gl_Position=p3;
     gs_out[0].color=c3;
     EmitVertex();
+    EndPrimitive();
+
+    gl_Position=p1;
+    gs_out[0].color=c1;
+    EmitVertex();
+    gl_Position=p2;
+    gs_out[0].color=c2;
+    EmitVertex();
+    gl_Position=p3;
+    gs_out[0].color=c3;
+    EmitVertex();
+    EndPrimitive();
+
     gl_Position=p0;
     gs_out[0].color=c0;
+    EmitVertex();
+    gl_Position=p3;
+    gs_out[0].color=c3;
     EmitVertex();
     gl_Position=p2;
     gs_out[0].color=c2;
