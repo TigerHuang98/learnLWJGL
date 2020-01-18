@@ -131,9 +131,7 @@ public class Sierpinski3D{
             mesh.colors.add(c3.y);
             mesh.colors.add(c3.z);
             mesh.indices.add(vertexCount);
-            mesh.indices.add(vertexCount+3);
             mesh.indices.add(vertexCount+1);
-            mesh.indices.add(vertexCount+3);
             mesh.indices.add(vertexCount+2);
             mesh.indices.add(vertexCount+3);
         }

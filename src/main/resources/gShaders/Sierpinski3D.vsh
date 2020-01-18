@@ -1,6 +1,6 @@
 #version 330
 
-layout(triangles_adjacency) in ;
+layout(lines_adjacency) in ;
 layout(triangle_strip, max_vertices=256) out;//max_vertices=192 can create half level-3 Sierpinski3D
 
 in VS_OUT{
@@ -44,12 +44,12 @@ void main(){
     StackFrame[total_level+1] stack;//main stack,
     stack[0]=StackFrame(//init frame
     gl_in[0].gl_Position,
+    gl_in[1].gl_Position,
     gl_in[2].gl_Position,
-    gl_in[4].gl_Position,
     gl_in[3].gl_Position,
     gs_in[0].color,
+    gs_in[1].color,
     gs_in[2].color,
-    gs_in[4].color,
     gs_in[3].color,
     total_level,
     0
