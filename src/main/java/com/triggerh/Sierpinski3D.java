@@ -10,17 +10,20 @@ public class Sierpinski3D{
     private static class Sierpinski3DMesh{
         ArrayList<Float> positions=new ArrayList<>();
         ArrayList<Float> colors=new ArrayList<>();
+        ArrayList<Float> normals=new ArrayList<>();
         ArrayList<Integer> indices=new ArrayList<>();
     }
 
     public static Mesh getSierpinski3DMesh(
             Vector3f p0,Vector3f p1,Vector3f p2,Vector3f p3,
             Vector3f c0,Vector3f c1,Vector3f c2,Vector3f c3,
+            Vector3f n0,Vector3f n1,Vector3f n2,Vector3f n3,
             int level
     ){
         Sierpinski3DMesh s3m=calculateMesh(
                 p0,p1,p2,p3,
                 c0,c1,c2,c3,
+                n0,n1,n2,n3,
                 level
         );
         float[] positionArray=new float[s3m.positions.size()];
@@ -35,9 +38,16 @@ public class Sierpinski3D{
         for(Float f:s3m.colors){
             colorArray[i++]=(f!=null?f:Float.NaN);
         }
+        float[] normalArray=new float[s3m.normals.size()];
+        i=0;
+
+        for(Float f:s3m.normals){
+            normalArray[i++]=(f!=null?f:Float.NaN);
+        }
         return new Mesh(
                 positionArray,
                 colorArray,
+                normalArray,
                 s3m.indices.stream().mapToInt(num_i->num_i).toArray()
         );
     }
@@ -45,12 +55,14 @@ public class Sierpinski3D{
     public static Sierpinski3DMesh calculateMesh(
             Vector3f p0,Vector3f p1,Vector3f p2,Vector3f p3,
             Vector3f c0,Vector3f c1,Vector3f c2,Vector3f c3,
+            Vector3f n0,Vector3f n1,Vector3f n2,Vector3f n3,
             int level
     ){
         Sierpinski3DMesh sierpinski3DMesh=new Sierpinski3DMesh();
         return calculateMesh(
                 p0,p1,p2,p3,
                 c0,c1,c2,c3,
+                n0,n1,n2,n3,
         level,sierpinski3DMesh
         );
     }
@@ -58,6 +70,7 @@ public class Sierpinski3D{
     public static Sierpinski3DMesh calculateMesh(
             Vector3f p0,Vector3f p1,Vector3f p2,Vector3f p3,
             Vector3f c0,Vector3f c1,Vector3f c2,Vector3f c3,
+            Vector3f n0,Vector3f n1,Vector3f n2,Vector3f n3,
             int level,Sierpinski3DMesh mesh
     ){
         if(level>0){
@@ -100,10 +113,10 @@ public class Sierpinski3D{
             c3.sub(c2,temp);
             c2.add(temp.div(2),c23);
 
-            calculateMesh(p0,p01,p02,p03,c0,c01,c02,c03,level-1,mesh);
-            calculateMesh(p01,p1,p12,p13,c01,c1,c12,c13,level-1,mesh);
-            calculateMesh(p02,p12,p2,p23,c02,c12,c2,c23,level-1,mesh);
-            calculateMesh(p03,p13,p23,p3,c03,c13,c23,c3,level-1,mesh);
+            calculateMesh(p0,p01,p02,p03,c0,c01,c02,c03,n0,n1,n2,n3,level-1,mesh);
+            calculateMesh(p01,p1,p12,p13,c01,c1,c12,c13,n0,n1,n2,n3,level-1,mesh);
+            calculateMesh(p02,p12,p2,p23,c02,c12,c2,c23,n0,n1,n2,n3,level-1,mesh);
+            calculateMesh(p03,p13,p23,p3,c03,c13,c23,c3,n0,n1,n2,n3,level-1,mesh);
         }else{
             int vertexCount=mesh.positions.size()/3;
             mesh.positions.add(p0.x);
@@ -130,6 +143,18 @@ public class Sierpinski3D{
             mesh.colors.add(c3.x);
             mesh.colors.add(c3.y);
             mesh.colors.add(c3.z);
+            mesh.normals.add(n0.x);
+            mesh.normals.add(n0.y);
+            mesh.normals.add(n0.z);
+            mesh.normals.add(n1.x);
+            mesh.normals.add(n1.y);
+            mesh.normals.add(n1.z);
+            mesh.normals.add(n2.x);
+            mesh.normals.add(n2.y);
+            mesh.normals.add(n2.z);
+            mesh.normals.add(n3.x);
+            mesh.normals.add(n3.y);
+            mesh.normals.add(n3.z);
             mesh.indices.add(vertexCount);
             mesh.indices.add(vertexCount+1);
             mesh.indices.add(vertexCount+2);
